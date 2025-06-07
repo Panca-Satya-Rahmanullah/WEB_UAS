@@ -1,0 +1,82 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-sm mt-4">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Edit Produk</h3>
+          <form action="/edit/<%= produk.id_produk %>" method="POST">
+            
+            <div class="mb-3">
+              <label for="nama_produk" class="form-label">Nama Produk</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nama_produk"
+                name="nama_produk"
+                value="<%= produk.nama_produk %>"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="harga" class="form-label">Harga (Rp)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="harga"
+                name="harga"
+                value="<%= produk.harga %>"
+                min="0"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="id_kategori" class="form-label">Kategori</label>
+              <select
+                class="form-select"
+                id="id_kategori"
+                name="id_kategori"
+                required
+              >
+                <option value="" disabled>Pilih kategori</option>
+                <% kategori.forEach(cat => { %>
+                  <option 
+                    value="<%= cat.id_kategori %>" 
+                    <%= cat.id_kategori === produk.id_kategori ? 'selected' : '' %>
+                  >
+                    <%= cat.nama_kategori %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label for="jumlah_stok" class="form-label">Jumlah Stok</label>
+              <input
+                type="number"
+                class="form-control"
+                id="jumlah_stok"
+                name="jumlah_stok"
+                value="<%= produk.jumlah_stok ?? 0 %>"
+                min="0"
+                required
+              />
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary w-100">
+                Simpan Perubahan
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
